@@ -1,0 +1,60 @@
+﻿@page "/login"
+
+<div class="centro">
+    <EditForm Model=@formModel OnValidSubmit=@ValidFormSubmitted class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="username">Usuário</label>
+                <InputText id="username" @bind-Value=formModel.User class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <InputText id="password" type="password" @bind-Value=formModel.Pass class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn-login">Login</button>
+            </div>
+
+            <div class="signup-link">
+                <p>Ainda não possui uma conta? <a href="/createAccount">Cadastre-se</a></p>
+                  
+            </div>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    string? LastSubmitResult;
+
+    [SupplyParameterFromForm]
+    FormModel formModel { get; set; } = new();
+
+    [SupplyParameterFromQuery]
+    private string? ReturnUrl { get; set; }
+
+    void ValidFormSubmitted(EditContext editContext)
+    {
+        LastSubmitResult = "OnValidSubmit was executed";
+    }
+
+    void InvalidFormSubmitted(EditContext editContext)
+    {
+        LastSubmitResult = "OnInvalidSubmit was executed";
+    }
+
+    public class FormModel
+    {
+        [Required]
+        [StringLength(16, ErrorMessage = "Name too long (16 character limit).")]
+        public string User { get; set; }
+
+        [Required]
+        public string Pass { get; set; }
+
+
+    }
+
+}
