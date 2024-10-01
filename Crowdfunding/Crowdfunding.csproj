@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\CreateAccount.razor.css" />
     <None Remove="Pages\Login.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Pages\CreateAccount.razor.css" />
     <Content Include="Pages\Login.razor.css" />
   </ItemGroup>
 
